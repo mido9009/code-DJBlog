@@ -29,6 +29,7 @@ class Post(models.Model):
     draft = models.BooleanField(default=True)
     publish_date = models.DateTimeField(default=timezone.now)
     tags = TaggableManager()
+    image = models.ImageField(upload_to="post")
     # publish_date2 = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
