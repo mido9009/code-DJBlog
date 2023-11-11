@@ -10,5 +10,7 @@ def list_post(request):
     return render(request, "posts/list_post.html", context)
 
 
-def post_detial():
-    pass
+def post_detial(request, post_id):
+    data = Post.objects.get(id=post_id)
+    context = {"post": data}
+    return render(request, "Posts/post_detial.html", context)
