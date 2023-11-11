@@ -2,6 +2,6 @@
 <h4>Bolg</h4>
 <ul>
 {% for post in m %}
-    <li>{{post}} - {{post.auth}} - {{post.publish_date}}</li>
+    <li><a href="/posts/{{post.id}}">{{post}}</a></li>
 {% endfor %}
 </ul>
