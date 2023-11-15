@@ -5,7 +5,7 @@ from .models import Post, Category, Comment
 
 
 class ProductAdmin(SummernoteModelAdmin):
-    list_display = ["title", "category", "draft"]
+    list_display = ["title", "category", "draft", "category"]
     list_filter = ["draft", "category", "tags"]
     search_fields = ["title", "tags"]
     summernote_fields = [
