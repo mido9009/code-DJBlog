@@ -25,9 +25,24 @@ def create_post(request):
             myform.auth = request.user
             myform.save()
             return redirect("/posts/")
-    form = PostForms()
+    else:
+        form = PostForms()
 
     return render(request, "posts/new.html", {"form": form})
+
+def edit_post(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == "POST":
+        form = PostForms(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.auth = request.user
+            myform.save()
+            return redirect("/posts/")
+    else:
+        form = PostForms(instance=post)
+
+    return render(request, "posts/edit.html", {"form": form})
 
 
 from django.views.generic import ListView, DetailView

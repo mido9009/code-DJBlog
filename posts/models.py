@@ -31,7 +31,7 @@ class Post(models.Model):
     draft = models.BooleanField(default=True)
     publish_date = models.DateTimeField(default=timezone.now)
     tags = TaggableManager()
-    image = models.ImageField(upload_to="post")
+    image = models.ImageField(upload_to="post",null=True, blank=True)
     category = models.ForeignKey(
         "Category", related_name="post_category", on_delete=models.SET_NULL, null=True
     )

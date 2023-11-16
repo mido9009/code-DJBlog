@@ -19,13 +19,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include
-from posts.views import PostList, PostDetail, create_post
+from posts.views import PostList, PostDetail, create_post, edit_post
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("posts/", PostList.as_view()),
     path("posts/new", create_post),
     path("posts/<int:pk>", PostDetail.as_view()),
+    path("posts/<int:pk>/edit", edit_post),
     path("summernote/", include("django_summernote.urls")),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
