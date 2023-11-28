@@ -30,6 +30,7 @@ def create_post(request):
 
     return render(request, "posts/new.html", {"form": form})
 
+
 def edit_post(request, pk):
     post = Post.objects.get(id=pk)
     if request.method == "POST":
@@ -45,7 +46,13 @@ def edit_post(request, pk):
     return render(request, "posts/edit.html", {"form": form})
 
 
-from django.views.generic import ListView, DetailView
+def delete_post(request, pk):
+    post = Post.objects.get(id=pk)
+    post.delete()
+    return redirect("/posts")
+
+
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 
 
 class PostList(ListView):
@@ -54,3 +61,14 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
+
+class AddPost(CreateView):
+    model = Post
+    fields='__all__'
+    success_url ='/posts/'
+
+class Editpost(UpdateView):
+    model = Post
+    fields='__all__'
+    success_url ='/posts/'
+    template_name = 'posts/edit.html'
