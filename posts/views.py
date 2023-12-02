@@ -5,16 +5,15 @@ from .forms import PostForms
 # Create your views here.
 
 
-"""def list_post(request):
+def post_list(request):
     data = Post.objects.all()
-    context = {"m": data}
-    return render(request, "posts/list_post.html", context)"""
+    context = {"object_list": data}
+    return render(request, "posts/post_list.html", context)
 
-
-"""def post_detial(request, post_id):
-    data = Post.objects.get(id=post_id)
+def post_detial(request, pk):
+    data = Post.objects.get(id=pk)
     context = {"post": data}
-    return render(request, "Posts/post_detial.html", context)"""
+    return render(request, "posts/post_detial.html", context)
 
 
 def create_post(request):
@@ -28,7 +27,7 @@ def create_post(request):
     else:
         form = PostForms()
 
-    return render(request, "posts/new.html", {"form": form})
+    return render(request, "posts/post_form.html", {"form": form})
 
 
 def edit_post(request, pk):
@@ -52,27 +51,3 @@ def delete_post(request, pk):
     return redirect("/posts")
 
 
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-
-
-class PostList(ListView):
-    model = Post
-
-
-class PostDetail(DetailView):
-    model = Post
-
-class AddPost(CreateView):
-    model = Post
-    fields='__all__'
-    success_url ='/posts/'
-
-class Editpost(UpdateView):
-    model = Post
-    fields='__all__'
-    success_url ='/posts/'
-    template_name = 'posts/edit.html'
-
-class DeletePost(DeleteView):
-    model = Post
-    success_url = '/posts/'
